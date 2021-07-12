@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <title>PetShop</title>
+	<style type="text/css">
+		
+		#coleira{
+		  height: 450px;
+		}
+		
+		.projects-img{
+		  display: inline-flex;
+		  width: 500px;
+		}
+		
+		 .cont-form{
+		  background-color: #fff;
+		  padding: 20px;
+		  box-shadow: 0px 0px 10px 0px #000;
+		  border-radius: 10px;
+		}
+		
+		ul{
+			list-style-type: none;
+		}
+				
+		
+	</style>
+</head>
+
+<body>
+	<header>
+	    <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+	            <a class="navbar-brand" href="#">Pet do doginho!</a>
+	            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="#servicos">Serviços</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="#compras">Compras</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="#contato">Contato</a>
+	                </li>
+	            </ul>
+	            <form class="form-inline my-2 my-lg-0">
+	                <input class="form-control mr-sm-2" type="search" placeholder="Busca" aria-label="Search">
+	                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquise</button>
+	            </form>
+	        </div>
+	    </nav>
+	</header>
+<!-- /////////////////////////////////////////// - HEADER - /////////////////////////////////////////////////////// -->
+<!--//////////////////////////////// INICIO GRUPO DE FOTS SUPERIOR ////////////////////////////-->
+  <div class="card-group container mt-5 bg-light p-3">
+    <div class="card">
+      <img src="https://assets.petco.com/petco/image/upload/f_auto,q_auto/1216511-right-1" class="card-img-top" alt="Casinha de cachorro">
+      <div class="card-body">
+        <h5 class="card-title">Casinha de cachorro</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://5.imimg.com/data5/VI/NW/YO/SELLER-2642037/black-dog-leash-collar-set-500x500.jpg" class="card-img-top" alt="Colerira canina">
+      <div class="card-body">
+        <h5 class="card-title">Colerira canina</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images-na.ssl-images-amazon.com/images/I/61WCF1l7k%2BL._AC_.gif" class="card-img-top" alt="osso de borracha">
+      <div class="card-body">
+        <h5 class="card-title">Osso de borracha</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ FINAL GRUPO DE FOTOS SUPERIOR \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+
+
+    <div class="container my-2">
+    <div class="card">
+    <div class="card-body">
+        <div th:switch="${clientes}" class="container my-5">
+            <p class="my-5">
+                <a href="/edita" class="btn btn-success">
+                <i class="fas fa-user-plus ml-2"> Adicionar cliente </i></a>
+            </p>
+            <div class="col-md-10">
+                <h2 th:case="null">Não encontrado !!</h2>
+                <div th:case="*">
+                    <table class="table table-striped table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Sobrenome</th>
+                                <th>Brinquedo</th>
+                                <th>Email</th>
+                                <th>Editar</th>
+                                <th>Deletar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="cliente : ${clientes}">
+                                <td th:text="${cliente.nome}">		</td>
+                                <td th:text="${cliente.sobrenome}">	</td>
+                                <td th:text="${cliente.brinquedo}">	</td>
+                                <td th:text="${cliente.email}">		</td>
+                                <td>
+                                    <a th:href="@{/edita/{id}(id=${cliente.id})}" class="btn btn-primary">
+                                        <i class="fas fa-user-edit ml-2"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/deleta/{id}(id=${cliente.id})}" class="btn btn-danger">
+                                        <i class="fas fa-user-times ml-2"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    
+<!-- /////////////////////////////////////////// - FOOTER - /////////////////////////////////////////////////////// -->	
+	<footer id="contato" class="footer bg-dark text-white">
+	    <div class="footer_top  bg-info text-white">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-xl-4 col-md-6 col-lg-4">
+	                    <div class="footer_widget  bg-info text-white text-center">
+	                        <div class="footer_logo">
+	                            <h1>PET DO DOGINHO</h1>
+	                        </div>
+	                        <p>
+	                            Tens uma ideia, nós a desenvolvemos para ti!
+	                        </p>
+	                        <div class="socail_links">
+	                            <ul>
+	                                <li>
+	                                    <a href="https://www.linkedin.com/in/felipe-teixeira-schefer-2b5735115/">
+	                                        <i class="i fab fa-linkedin"></i>
+	                                    </a>
+	                                </li>
+	                                <li>
+	                                    <a href="https://github.com/FelipeSchefer">
+	                                        <i class="i fab fa-github"></i>
+	                                    </a>
+	                                </li>
+	                                <li>
+	                                    <a href="https://www.instagram.com/felipe_schefer/">
+	                                        <i class="i fa fa-instagram"></i>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-xl-3 offset-xl-1 col-md-6 col-lg-3">
+	                    <div class="footer_widget">
+	                        <h3 class="footer_title"> Contato </h3>
+	                        <ul>
+	                            <li><i class="i fa fa-envelope"></i> email@hotmail.com </li>
+	                            <li><i class="i fa fa-phone"></i> <a href="55 51 989573803">55 51 999999999</a></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	                <div class="col-xl-4 col-md-6 col-lg-4">
+	                    <div class="footer_widget">
+	                        <h3 class="footer_title"> Endereço </h3>
+	                        <ul>
+	                            <li>Cachoeirinha | RS | Brasil</li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="copy-right_text">
+	        <div class="container">
+	            <div class="footer_border"></div>
+	            <div class="row">
+	                <div class="col-xl-12">
+	                    <p class="copy_right text-center">
+	                        Copyright &copy;
+	                        <script>
+	                            document.write(new Date().getFullYear());
+	                        </script>
+	                        Todos Direitos Reservados
+	                    </p>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</footer>
+</body>
+</html>

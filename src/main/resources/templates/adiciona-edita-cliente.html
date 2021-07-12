@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Adicionar Cliente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h3> Adicionar Cliente</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form action="#" th:action="@{/criaCliente}" th:object="${cliente}" method="post" onsubmit="return validaForm(this);">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="name" class="col-form-label">Nome</label> 
+                                <input type="text" 
+                                	   th:field="*{nome}" 
+                                	   class="form-control" 
+                                       id="firstName" 
+                                       placeholder="Nome"
+                                       name="nome" 
+                                 />
+                            </div>
+                            
+                            <div class="form-group col-md-8">
+                                <label for="name" class="col-form-label">Sobrenome</label> 
+                                <input type="text" 
+                                	   th:field="*{sobrenome}" 
+                                	   class="form-control" 
+                                       id="lastName" 
+                                       placeholder="Sobrenome"
+                                       name="sobrenome" 
+                                 />
+                            </div>
+                               
+					        <div class="form-group col-md-8">
+						        <label for="brinquedo">Brinquedos</label>
+							    <select name="brinquedo" class="form-control" th:field="*{brinquedo}" placeholder="Brinquedo" id="brinquedo">
+							      <option selected value="">		  Selecione o brinquedo</option>
+							      <option value="Bolinha">			  Bolinha			   </option>
+							      <option value="Osso">				  Osso				   </option>
+							      <option value="Galinha de borracha">Galinha de borracha  </option>
+							      <option value="Casinha de cachorro">Casinha de cachorro  </option>
+							      <option value="Colerira canina">    Colerira canina	   </option>
+							      <option value="Osso de borracha">   Osso de borracha	   </option>			      
+							   </select>
+						    </div>
+	                                                 
+                            <div class="form-group col-md-8">
+                                <label for="email" class="col-form-label">Email</label> 
+                                <input type="text" 
+                                	   th:field="*{email}" 
+                                	   class="form-control" 
+                                       id="email" 
+                                       placeholder="Email Id"
+                                       name="email" 
+                                 />
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>
+
+                            <input type="hidden" id="id" th:field="*{id}">
+    
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+		function validaForm(frm) {
+			
+		    //Verifica se o campo nome foi preenchido
+		    if(frm.nome.value == "" || frm.nome.value == null) {
+		        //É mostrado um alerta, caso o campo esteja vazio.
+		        alert("Por favor, indique o seu nome.");
+		        //Foi definido um focus no campo.
+		        frm.nome.focus();
+		        //o form não é enviado.
+		        return false;
+		    }
+		    
+		    //Valida o lastName, que é como validar um campo de texto simples.
+		    if(frm.sobrenome.value == "" || frm.sobrenome.value == null) {
+		        alert("Por favor, indique o seu sobrenome.");
+		        frm.sobrenome.focus();
+		        return false;
+		    }
+		    
+		    //Valida o brinquedo, que é como validar um campo de texto simples.
+		    if(frm.brinquedo.options[frm.brinquedo.selectedIndex].value=="") {
+		        alert("Por favor, selecione um brinquedo");
+		        brinquedo.focus();
+		        return false;
+		    }
+		    
+		    //o campo e-mail precisa de conter: "@", "." e não pode estar vazio
+		    if(frm.email.value.indexOf("@") == -1 ||
+		      frm.email.valueOf.indexOf(".") == -1 ||
+		      frm.email.value == "" ||
+		      frm.email.value == null) {
+		        alert("Por favor, indique um e-mail válido.");
+		        frm.email.focus();
+		        return false;
+		    }
+		}
+	</script>
+</body>
+</html>
